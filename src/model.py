@@ -52,7 +52,7 @@ class HandwritingTranslator(object):
 
 	def detect(self, img):
 		"""Detect and seperate every single image of symbol 
-		from image using modified row by row connected components algorithm.
+		from image using row by row connected components algorithm.
 		Return list of image and label.
 		"""
 		d = {0:0}
@@ -118,4 +118,5 @@ class HandwritingTranslator(object):
 		nums = utils.sort_by_other_list(nums, cxs)
 		confs = utils.sort_by_other_list(confs, cxs)
 		imgs_ok = utils.sort_by_other_list(imgs_ok, cxs)
-		print(''.join(nums))
+		calculation = ''.join(nums)
+		return ' ' + calculation
