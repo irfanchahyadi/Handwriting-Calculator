@@ -1,6 +1,6 @@
 import numpy as np
-from src import utils
 from PIL import Image
+import utils
 import keras
 
 
@@ -9,10 +9,12 @@ class HandwritingTranslator(object):
 	and translate to pattern.
 	"""
 
-	def __init__(self):
+	def __init__(self, model=1):
 		self.M_SIZE = 28     # is size of each sample on MNIST dataset 28x28
 		self.PADDING = 8     # number of empty pixel row / column (the smallest one)
-		self.model = keras.models.load_model('src/model.h5')     # keras model for predict symbol
+		
+		if model == 1:
+			self.model = keras.models.load_model('src/model.h5')     # keras model for predict symbol
 
 	def image_centering(self, img):
 		"""Return M_SIZE x M_SIZE array of img on center with padding."""
@@ -120,3 +122,11 @@ class HandwritingTranslator(object):
 		imgs_ok = utils.sort_by_other_list(imgs_ok, cxs)
 		calculation = ''.join(nums)
 		return ' ' + calculation
+
+	def prep(self, image):
+		"""Prepare single image to be formatted image like MNIST."""
+		img = self.thresholding(image)
+		img, cx = self.crop(img, 1)
+		img = self.image_resize(img)
+		img = self.image_centering(img)
+		return img

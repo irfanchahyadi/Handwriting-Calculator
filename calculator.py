@@ -1,6 +1,9 @@
 import tkinter as tk
 from PIL import ImageGrab
-from src import model
+import sys
+sys.path.insert(0, sys.path[0]+'\\src')
+import model
+
 
 CANVAS_WIDTH = 1200
 CANVAS_HEIGHT = 200
