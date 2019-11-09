@@ -1,7 +1,6 @@
 import numpy as np
 from PIL import Image
 import utils
-import keras
 
 
 class HandwritingTranslator(object):
@@ -14,6 +13,7 @@ class HandwritingTranslator(object):
 		self.PADDING = 8     # number of empty pixel row / column (the smallest one)
 		
 		if model == 1:
+			import keras
 			self.model = keras.models.load_model('src/model.h5')     # keras model for predict symbol
 
 	def image_centering(self, img):

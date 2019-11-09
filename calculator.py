@@ -22,7 +22,7 @@ class HandwritingCalculator(object):
 		self.v_calculation = tk.StringVar()
 		f1 = tk.Frame(self.root, width=CANVAS_WIDTH)
 		f1.grid(row=1, column=0, sticky='w')
-		self.label = tk.Label(f1, textvariable=self.v_calculation, font=('Courier', 50))
+		self.label = tk.Label(f1, textvariable=self.v_calculation, font=('Courier', 30))
 		self.label.grid(row=0, column=0)
 		self.v_calculation.set('Right-click for clear')
 		self.setup()

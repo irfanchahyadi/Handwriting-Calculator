@@ -56,6 +56,7 @@ class AddDataset(object):
 		self.root.mainloop()
 	
 	def load_imgs(self):
+		"""Load previous image data if exists."""
 		try:
 			with open(PICKLE_FILE, 'rb') as f:
 				data = pickle.load(f)
@@ -65,14 +66,15 @@ class AddDataset(object):
 		return data
 	
 	def save_imgs(self):
+		"""Save image data after closing window."""
 		with open(PICKLE_FILE, 'wb') as f:
 				pickle.dump(self.saved_imgs, f)
 		self.root.destroy()
 
 	def done(self):
 		"""Change symbol and save current image."""
-		x1 = self.c.winfo_rootx() + self.c.winfo_x()
-		y1 = self.c.winfo_rooty() + self.c.winfo_y()
+		x1 = self.c.winfo_rootx()
+		y1 = self.c.winfo_rooty()
 		x2 = x1 + CANVAS_WIDTH
 		y2 = y1 + CANVAS_HEIGHT
 		image = ImageGrab.grab((x1,y1,x2,y2)).convert('L')
