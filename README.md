@@ -41,9 +41,9 @@ pip install -r requirements.txt
 ## How it works
 User draw handwritten number in tkinter canvas and get the image with `PIL.ImageGrab`.
 I convert it to `numpy.array`, then apply thresholding to get binary array of each pixel.
-Then, using connected component algorithm, we can separate each number on canvas (remember canvas can contain multiple handwriten number).
+Then, using connected component algorithm, we can separate each number on canvas (remember canvas can contain multiple handwriten number/operator).
 For each number, resize image to match MNIST dataset sample size, thats 28 by 28 pixel with min padding 4 pixel, by still keeping its aspect ratio. Dont forget to center the number in this image.
-The last step, just throw it to model.predict to translate what number is it.
+The last step, just throw it to `model.predict` to translate what number/operator is it and evaluate the whole calculation.
 
 Note:
 I found a problem with `PIL.ImageGrab` when you scale display with other than 100% (on windows, display setting > scale and layout). This mostly occured when you using HD display 1920x1080 or above, you probably scale to 150%.
