@@ -3,10 +3,11 @@ Implement MNIST dataset for handwriting recognition. Apply to calculator app.
 
 <p align="center">
   <img src="demo/demo2.gif"><br/>
-  <i>Progress</i>
+  <i>Handwriting-Calculator</i>
 </p>
 
 Fully functioning calculator that take handwritten number as an input. Can do some basic calculation like addition, subtraction, multiplication, and division. Equipped with bracket and comma for decimal value. Follow order of operation in math. 
+
 Handwriting calculator built in top of Handwriting Recognition Neural Network model, train with Keras with 2 hidden layer 20 unit each. Model feed with 70.000 sample number between 0 - 9 MNIST dataset + 49.000 sample of operator symbol `+  -  x  /  (  )  ,` populated manually.
 
 <p align="center">
