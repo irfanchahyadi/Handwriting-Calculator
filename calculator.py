@@ -1,3 +1,10 @@
+
+"""
+Calculator
+Author: Irfan Chahyadi
+Source: github.com/irfanchahyadi/Handwriting-Calculator
+"""
+
 import tkinter as tk
 from PIL import ImageGrab
 import sys
@@ -47,6 +54,7 @@ class HandwritingCalculator(object):
 	def reset(self, event):
 		"""Delete all."""
 		self.c.delete('all')
+		self.v_calculation.set('Right-click for clear')
 
 	def finish_draw(self, event):
 		"""Run when user done writing single number/symbol."""

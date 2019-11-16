@@ -1,3 +1,10 @@
+
+"""
+Model
+Author: Irfan Chahyadi
+Source: github.com/irfanchahyadi/Handwriting-Calculator
+"""
+
 import numpy as np
 from PIL import Image
 import utils
@@ -11,7 +18,7 @@ class HandwritingTranslator(object):
 	def __init__(self, model=1):
 		self.M_SIZE = 28     # is size of each sample on MNIST dataset 28x28
 		self.PADDING = 8     # number of empty pixel row / column (the smallest one)
-		
+		self.MAP_SYMBOLS = {10: '+', 11: '-', 12: '*', 13: '/', 14: '(', 15: ')', 16: '.'}
 		if model == 1:
 			import keras
 			self.model = keras.models.load_model('src/model.h5')     # keras model for predict symbol
@@ -82,18 +89,38 @@ class HandwritingTranslator(object):
 
 	def thresholding(self, image):
 		"""Convert image object to numpy array
-		then thresholding each pixel to binary (grayscale)"""
+		then thresholding each pixel to binary (grayscale)."""
 		img = np.array(image)
 		thresh = np.vectorize(lambda x: 1 if x == 0 else 0)
 		img = thresh(img)
 		return img
 
 	def predict(self, img):
-		"""Run model.predict from keras model, and interpret it's symbol"""
+		"""Run model.predict from keras model, and interpret it's symbol."""
 		res = self.model.predict(img.reshape(1, self.M_SIZE**2))
-		num = str(res.argmax())
+		num = res.argmax()
 		conf = round(res.max()*100, 2)
+		if num >= 10:
+			num = self.MAP_SYMBOLS[num]
+		num = str(num)
 		return num, conf
+
+	def calculate(self, calculation):
+		"""Return text contain calculation and answer for displaying to user."""
+		try:
+			result = eval(calculation)
+			if calculation == str(result):
+				result = ''
+			else:
+				if int(result) == result:
+					result = int(result)
+				else:
+					result = np.round(result, 2)
+				result = ' = ' + str(result)
+		except Exception as e:
+			result = ''
+		result = ' ' + calculation + result
+		return result
 
 	def translate(self, image):
 		"""Return string of symbols from multiple handwritten symbols on img.
@@ -104,7 +131,6 @@ class HandwritingTranslator(object):
 		imgs_ok = []
 		cxs = []
 		imgs = self.thresholding(image)
-		# np.savetxt('before.csv', imgs, delimiter=',')
 		imgs, d = self.detect(imgs)
 		labels = set(d.values())
 		labels.remove(0)
@@ -121,10 +147,11 @@ class HandwritingTranslator(object):
 		confs = utils.sort_by_other_list(confs, cxs)
 		imgs_ok = utils.sort_by_other_list(imgs_ok, cxs)
 		calculation = ''.join(nums)
-		return ' ' + calculation
+		display = self.calculate(calculation)
+		return display
 
 	def prep(self, image):
-		"""Prepare single image to be formatted image like MNIST."""
+		"""Prepare single image to be formatted image like MNIST sample image."""
 		img = self.thresholding(image)
 		img, cx = self.crop(img, 1)
 		img = self.image_resize(img)

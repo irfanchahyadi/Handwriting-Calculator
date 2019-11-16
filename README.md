@@ -2,12 +2,20 @@
 Implement MNIST dataset for handwriting recognition. Apply to calculator app.
 
 <p align="center">
-  <img src="demo/demo.gif"><br/>
+  <img src="demo/demo2.gif"><br/>
   <i>Progress</i>
 </p>
 
-Progress so far, calculator can understand input from handwritten number, by help of Neural Network model train with Keras with 2 hidden layer 20 unit each. But the calculator app not only gets input as a number but also operator symbol.
-I still populate handwritten dataset for simple operator symbol `+  -  x  /  (  )  ,` with  add_dataset.py. I think i need as much as MNIST dataset (70.000 sample) to get balance combined dataset.
+Fully functioning calculator that take handwritten number as an input. Can do some basic calculation like addition, subtraction, multiplication, and division. Equipped with bracket and comma for decimal value. Follow order of operation in math. 
+Handwriting calculator built in top of Handwriting Recognition Neural Network model, train with Keras with 2 hidden layer 20 unit each. Model feed with 70.000 sample number between 0 - 9 MNIST dataset + 49.000 sample of operator symbol `+  -  x  /  (  )  ,` populated manually.
+
+<p align="center">
+  <img src="src/dataset/operator.png"><br/>
+  <i>Operator dataset</i>
+</p>
+
+Actually, i just populate 4.900 sample of operator symbol, then i duplicate each sample ten times. Hopely, this will avoid problem cause by imbalance dataset. 
+You can improve this model by continue populate until achive 49.000 sample with `add_dataset.py` in src folder. :smile: 
 
 ## Setting Environment (optional)
 Ignore this step if you dont want to use virtual environment
@@ -24,7 +32,7 @@ Install required tools
 pip install -r requirements.txt
 ```
 **This tools require :**
-- [pillow](https://github.com/python-pillow/Pillow), for grab image from tkinter canvas
+- [Pillow](https://github.com/python-pillow/Pillow), for grab image from tkinter canvas
 - [Numpy](https://github.com/numpy/numpy), for doing image processing as an array
 - [TensorFlow](https://github.com/tensorflow/tensorflow), backend for Keras
 - [Keras](https://github.com/keras-team/keras), for build and train Neural Network model

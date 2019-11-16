@@ -1,3 +1,10 @@
+
+"""
+Add Dataset
+Author: Irfan Chahyadi
+Source: github.com/irfanchahyadi/Handwriting-Calculator
+"""
+
 import tkinter as tk
 from PIL import ImageGrab
 import model
@@ -10,7 +17,7 @@ LINE_WIDTH = 20
 PICKLE_FILE = 'dataset/data.pickle'
 
 class AddDataset(object):
-	"""Add dataset manually."""
+	"""Add sample dataset manually."""
 
 	def __init__(self):
 		"""Init for creating gui structure."""
