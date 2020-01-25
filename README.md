@@ -15,8 +15,8 @@ Handwriting calculator built in top of Handwriting Recognition Neural Network mo
   <i>Operator dataset</i>
 </p>
 
-Actually, i just populate 4.900 sample of operator symbol, then i duplicate each sample ten times. Hopely, this will avoid problem cause by imbalance dataset. 
-You can improve this model by continue populate until achive 49.000 sample with `add_dataset.py` in src folder. :smile: 
+Actually, i just populate 4.900 sample of operator symbol, then i duplicate each sample ten times without any transformation. Hopely, this will avoid problem cause by imbalance dataset. 
+You can improve this model by duplicate it with transformation (rotation / mirror) or continue populate operator symbol until achive 49.000 sample with `add_dataset.py` in src folder. :smile: 
 
 ## Setting Environment (optional)
 Ignore this step if you dont want to use virtual environment
